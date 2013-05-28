@@ -1,0 +1,34 @@
+<html>
+
+  <head>
+    <title>Example map of south sudan</title>
+
+    <link rel="stylesheet" href="./mapping.css" type="text/css" ></link>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+   
+    <script src="http://openlayers.org/api/2.12/OpenLayers.js">A</script>
+    <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+
+
+    <script src="./mapping.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+      //    example_map();
+        var initialBounds = lonLatBounds(lonLatPoint(22.9224, 3.0545), lonLatPoint(36.3033, 12.6503));
+        load_map("map", "polls_south_sudan", "http://localhost:8088/geoserver", initialBounds);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <h1>Here is a map of South Sudan</h1>
+    </div>
+
+    <div id="map"></div>
+  </body>
+
+  
+</html>
