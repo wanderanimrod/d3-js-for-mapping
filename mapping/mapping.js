@@ -18,7 +18,7 @@ function lonLatPoint(lon, lat) {
  left, bottom, right, top --> bottomLeftPoint(Lon, Lat), topRightPoint(Lon, Lat)
 */
 var ESPG_4326_PROJECTION = new OpenLayers.Projection("EPSG:4326"); // This is the standard lon lat projection
-var ESPG_900913_PROJECTION = new OpenLayers.Projection("EPSG:900913"); // This is google v3
+var ESPG_900913_PROJECTION = new OpenLayers.Projection("EPSG:900913"); // This is google v3, or mercator projection
 
 function lonLatBounds(bottomLeft, topRight) {
    
@@ -34,7 +34,12 @@ function lonLatBounds(bottomLeft, topRight) {
 }
 
 function createMapContainer(divId) {
-    var map = new OpenLayers.Map(divId, {controls: []});
+    var map_options = {
+        controls: [],
+        projection: ESPG_900913_PROJECTION // need this or the overlays don't work
+    }
+
+    var map = new OpenLayers.Map(divId, map_options);
   
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.addControl(new OpenLayers.Control.PanZoomBar({
@@ -54,28 +59,35 @@ function createGoogleBaseLayer() {
     return new OpenLayers.Layer.Google("Google road map", google_road_map_options);
 }
 
-// function createPollLayer(options) {
-    
-//     poll_data_layer = new OpenLayers.Layer.WMS(layerName, wmsServerUrl,
-//         {
-//             VIEWPARAMS: 'poll:{{poll.pk}};app:{{deployment_id}}',
-//             LAYERS: layerName,
-//         },
-//         {
-//             isBaseLayer: false,
-//         }
-//     );
-// }
+function createPollLayer(o) {
+    var params = {
+        layers: o.layerWmsName,
+        styles: '',
+        transparent: "true",
+        format: 'image/png',
+        viewparams: "poll:" + o.pollId + ";app:" + o.appId        
+    }
+
+    var options = {
+        opacity: 0.8,
+        singleTile: false,
+        isBaseLayer: false
+    }
+
+    console.log("Creating a poll data layer with options [" + o + "]");
+    return new OpenLayers.Layer.WMS(o.layerDisplayName, o.wmsUrl, params, options);
+}
+
 
 // Note that the zoom level is automatically calculated by the size of the div and that of the bounding box
 // So if you need it zoomed in more, you may need to make the div bigger
 function load_map(divId, initialBounds, dataLayer) {
-    console.log("Loading a map into div [" + divId + "]");
-  
+    console.log("Loading a map into div [" + divId + "] with data layer ["+ dataLayer.name +"], url ["+ dataLayer.url +"], keys [" + Object.keys(dataLayer) + "]");
+
     var map = createMapContainer(divId);
 
-    map.addLayers([createGoogleBaseLayer()]);
-    
+    map.addLayers([createGoogleBaseLayer(), dataLayer]);
+  
     map.zoomToExtent(initialBounds.espg900913);
 
     console.log("Set the extent to [" + initialBounds.lonLatString +"]");
