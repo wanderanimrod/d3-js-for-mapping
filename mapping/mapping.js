@@ -69,7 +69,7 @@ function createPollLayer(o) {
     }
 
     var options = {
-        opacity: 0.8,
+        opacity: 1.0,
         singleTile: false,
         isBaseLayer: false
     }
