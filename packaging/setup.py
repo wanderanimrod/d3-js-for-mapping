@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+#from distutils.core import setup
+# you may need setuptools instead of distutils
+
+from setuptools import setup
 
 setup(name='BusyBee',
       version='1.0',
@@ -9,5 +12,10 @@ setup(name='BusyBee',
       author_email='jim@foobar.com',
       url='http://foobar.com',
       packages=['busybee'],
+      scripts = [
+          'scripts/busybee'
+      ]
      )
+
+
 

@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+
+print "Hey this is me script"
