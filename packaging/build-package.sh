@@ -26,5 +26,19 @@ dch --create -v 1.0-1 --package busybee
 
 echo 8 >> debian/compat
 
+cp ../../../debian/control debian/control
+
+echo "" >> debian/copyright
+
+cp ../../../debian/rules debian/rules
+
+mkdir -p debian/source
+
+echo "3.0 (quilt)" >> debian/source/format
+
+# it makes the package one level up
+# you can now install and remove them when you like..
+# install: sudo dpkg -i busybee_1.0-1_amd64.deb 
+# remove : sudo dpkg -r busybee
 
 
