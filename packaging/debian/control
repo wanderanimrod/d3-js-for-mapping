@@ -1,0 +1,12 @@
+Source: busybee
+Maintainer: Jim Barritt <jmdb@nanga-parbat.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 8)
+
+Package: busybee
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Buzzes
+ busybee does some buzzing

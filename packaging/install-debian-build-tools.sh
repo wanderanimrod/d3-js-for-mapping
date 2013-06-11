@@ -9,7 +9,7 @@ echo "Going to install all the build tools we need..."
 
 sudo apt-get update
 
-sudo apt-get install -y debhelper dh-make devscripts gnupg lintian patch patchutils pbuilder fakeroot file
+sudo apt-get install -y debhelper dh-make devscripts gnupg lintian patch patchutils pbuilder fakeroot file build-essential
 
 sudo apt-get install -y python-pip
 
@@ -24,3 +24,6 @@ cd ~/.virtualenvs
 virtualenv --no-site-packages packaging
 
 cd ~/Code/spikes/packaging
+
+
+
