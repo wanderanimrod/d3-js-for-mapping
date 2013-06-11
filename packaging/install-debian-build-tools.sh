@@ -4,4 +4,6 @@
 
 echo "Going to install all the build tools we need..."
 
-sudo apt-get install -y debhelper deb-make devscripts gnupg lintian patch patchutils pbuilder
+sudo apt-get update
+
+sudo apt-get install -y debhelper dh-make devscripts gnupg lintian patch patchutils pbuilder fakeroot file
