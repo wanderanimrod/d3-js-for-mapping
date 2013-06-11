@@ -4,6 +4,9 @@
 
 echo "Going to build the debian package..."
 
+rm -rf dist
+mkdir dist
+
 tar cvzf dist/hello_1.0.orig.tar.gz hello/ say-hello.py 
 
 mkdir -p dist/debian
