@@ -21,14 +21,13 @@
               wmsUrl: "http://localhost:8088/geoserver/unicef/wms",
               layerDisplayName: "Poll Results",
               layerWmsName: "unicef:polls_south_sudan",
-              pollId: 231,
+              pollId: 245,
               appId: 1
           }
 
           var pollResultsLayer = createPollLayer(pollLayerOptions);
 
           var initialBounds = lonLatBounds(lonLatPoint(22.9224, 3.0545), lonLatPoint(36.3033, 12.6503));
-
           load_map("map", initialBounds, pollResultsLayer);
       }
 

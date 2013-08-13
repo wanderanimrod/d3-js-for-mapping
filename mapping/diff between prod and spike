@@ -1,0 +1,24 @@
+//Not specified in spike
+
+OpenLayers.Layer.WMS:
+
+- dict of "params:"
+----------------------------------------
+tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom,
+tiled: true
+
+-dict of options:
+------------------
+buffer: 0,
+displayOutsideMaxExtent: false,
+*******************************
+
+Party Poopers:
+
+- maxExtent: bounds
+
+
+
+Hard Coded Parts in South Sudan Choropleth:
+
+* Popup event, params {unicef:polls_south_sudan}

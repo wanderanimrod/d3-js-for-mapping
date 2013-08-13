@@ -45,6 +45,7 @@ function createMapContainer(divId) {
     map.addControl(new OpenLayers.Control.PanZoomBar({
           position: new OpenLayers.Pixel(10, 15)
     }));
+    map.addControl(new OpenLayers.Control.Navigation());
 
     map.events.on({"zoomend": function () {on_map_zoom(map)}});
 
@@ -59,13 +60,13 @@ function createGoogleBaseLayer() {
     return new OpenLayers.Layer.Google("Google road map", google_road_map_options);
 }
 
-function createPollLayer(o) {
+function createPollLayer(layerOptions) {
     var params = {
-        layers: o.layerWmsName,
+        layers: layerOptions.layerWmsName,
         styles: '',
         transparent: "true",
         format: 'image/png',
-        viewparams: "poll:" + o.pollId + ";app:" + o.appId        
+        viewparams: "poll:" + layerOptions.pollId + ";app:" + layerOptions.appId
     }
 
     var options = {
@@ -74,15 +75,15 @@ function createPollLayer(o) {
         isBaseLayer: false
     }
 
-    console.log("Creating a poll data layer with options [" + o + "]");
-    return new OpenLayers.Layer.WMS(o.layerDisplayName, o.wmsUrl, params, options);
+    console.log("Creating a poll data layer with options [" + options + "]");
+    return new OpenLayers.Layer.WMS(layerOptions.layerDisplayName, layerOptions.wmsUrl, params, options);
 }
 
 
 // Note that the zoom level is automatically calculated by the size of the div and that of the bounding box
 // So if you need it zoomed in more, you may need to make the div bigger
 function load_map(divId, initialBounds, dataLayer) {
-    console.log("Loading a map into div [" + divId + "] with data layer ["+ dataLayer.name +"], url ["+ dataLayer.url +"], keys [" + Object.keys(dataLayer) + "]");
+    console.log("Loading a map into div [" + divId + "] with data layer [" + dataLayer.name + "], url [" + dataLayer.url + "], keys [" + Object.keys(dataLayer) + "]");
 
     var map = createMapContainer(divId);
 
@@ -91,7 +92,8 @@ function load_map(divId, initialBounds, dataLayer) {
     map.zoomToExtent(initialBounds.espg900913);
 
     console.log("Set the extent to [" + initialBounds.lonLatString +"]");
-    
+    console.log("Map Layers: " + map.layers);
+
 } 
 
 
