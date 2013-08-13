@@ -1,0 +1,22 @@
+<html>
+	<title>South Sudan in D3</title>
+	<h2>South Sudan in D3</h2>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	</head>
+	<body>
+		<svg id="map" width="500px" height="500px"/>
+		<script type="text/javascript">
+			var path = d3.geo.path();
+			d3.json("sudan.json", function(json) {
+				svg.selectAll("path")
+					.data(json.features)
+					.enter()
+					.append("path")
+					.attr("d", path);
+			});
+			console.log("Asynchronous call called");
+		</script>
+	</body>
+</html>
