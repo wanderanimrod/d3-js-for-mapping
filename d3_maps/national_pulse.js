@@ -57,9 +57,10 @@ d3.json("districts.json", function(json) {
 		.enter()
 		.append("path")
 		.attr("d", path)
-		.style("fill", function(d) {
+		.style("fill", function(district) {
 	        //Get data value
-	        value = d.properties.value;
+	        value = district.properties.value;
            	return color(value);
-    	});
+    	})
+    	;
 });	
