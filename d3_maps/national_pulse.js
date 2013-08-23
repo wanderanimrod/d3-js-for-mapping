@@ -6,42 +6,40 @@ function DataPoint(district, score) {
 function fetch_data(districts) {
 	var dataPoints = [];
 	districts.forEach(function(district) {
-		districtName = district.properties.name;
-		randomScore = Math.random();
-		dataPoint = new DataPoint(districtName, randomScore);
+        var districtName = district.properties.name;
+        var randomScore = Math.random();
+        var dataPoint = new DataPoint(districtName, randomScore);
 		dataPoints.push(dataPoint); 
 	});
 	return dataPoints;
-};
+}
 
-var projection = d3.geo.transverseMercator()
-	.center([30, 0])
-	.scale(2850);
-	// .center([30.30, 7.25])
-	// .scale(2000)
-	;
+projection = d3.geo.mercator()
+    .center([30, 0])
+    .scale(2850)
+//    .center([30.30, 7.25])
+//    .scale(2000)
+    ;
 
-var svg = d3.select("#map").append("svg:svg")
-					.attr("width", 2000)
-					.attr("height", 550);
+svg = d3.select("#map").append("svg:svg")
+        .attr("width", 2000)
+        .attr("height", 550);
 
-var color = d3.scale.quantize()
-        			.range(["rgb(237,248,233)", "rgb(186,228,179)", 
-        				"rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"
-        			]);
+color = d3.scale.quantize().range(["rgb(237,248,233)", "rgb(186,228,179)",
+            "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"
+            ]);
 
-var path = d3.geo.path().projection(projection);
+path = d3.geo.path().projection(projection);
 
 d3.json("districts.json", function(json) {
 
-	data = fetch_data(json.features);
+    var data = fetch_data(json.features);
 
 	data.forEach(function(dataPoint) {
 		var district = dataPoint.district;
         var score = parseFloat(dataPoint.score);
 
         //Find the corresponding district inside the GeoJSON
-        jsonDistricts = json.features
         for (var j = 0; j < json.features.length; j++) {
 	        var jsonDistrict = json.features[j].properties.name;
 	        if (district == jsonDistrict) {
@@ -59,7 +57,7 @@ d3.json("districts.json", function(json) {
 		.attr("d", path)
 		.style("fill", function(district) {
 	        //Get data value
-	        value = district.properties.value;
+            var value = district.properties.value;
            	return color(value);
     	})
     	;
