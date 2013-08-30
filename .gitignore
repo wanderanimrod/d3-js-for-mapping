@@ -1,6 +1,6 @@
 *iws
 */target
 */out
-*/.DS_Store
+.DS_Store
 *.swp
 .idea
