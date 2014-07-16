@@ -18,8 +18,8 @@ var width = 1500,
     height = 800;
 
 projection = d3.geo.mercator()
-    .center([33.0, 1.35])
-    .scale(4000)
+    .center([32.0, 1.35])
+    .scale(7000)
     .translate([width/2, height/2]);
 
 svg = d3.select("#map").append("svg")
