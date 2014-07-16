@@ -57,13 +57,5 @@ d3.json("districts.json", function(json) {
 		.attr("fill", function(district) {
             var value = district.properties.value;
            	return color(value);
-    	})
-        .on('click', function(district) {
-            showLocalPollResults(district);
-        });
+    	});
 });
-
-function showLocalPollResults(districtJson) {
-    console.log(districtJson.properties.name + " clicked!");
-    var resultsPopupShowing = false
-}
